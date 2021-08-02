@@ -60,33 +60,23 @@ if __name__ == "__main__":
         new_objs = []
         # get rotated bbox
         for obj in objs:
-            if obj['label'] == 'null-label':
-                points = obj['points']
-                line1 = LineString(points[:2])
-                point2 = Point(points[2])
-                point3 = Point(points[3])
-                d1 = point2.distance(line1)
-                d2 = point3.distance(line1)
-                line2 = line1.parallel_offset(d1, side='right')
-                line3 = line1.parallel_offset(d2, side='left')
-                side2 = judge_direction(points[0], points[1], points[2]) # judge the direction of the parallel line
-                side2_ = judge_direction(points[0], points[1], list(line2.coords[0])) 
-                if side2 != side2_:
-                    line2 = line1.parallel_offset(d1, side='left')
-                    line3 = line1.parallel_offset(d2, side='right')
-                new_points = [list(line2.coords[0]), list(line2.coords[1]), list(line3.coords[0]), list(line3.coords[1])]
-                get_label(new_points, objs)
-        # get not null_label information
-        for obj in objs:
             points = obj['points']
-            ps = np.array(points)
-            if not ((0 <= ps[:, 0]) & (ps[:, 0] <= width - 1) & (0 <= ps[:, 1]) & (ps[:, 1] <= height - 1)).all():
-                out_boundary.append(label_info['imagePath'])
-            if obj['label'] != 'null-label':
-                new_objs.append(obj)
-
-        label_info['shapes'] = new_objs
-
+            line1 = LineString(points[:2])
+            point2 = Point(points[2])
+            point3 = Point(points[3])
+            d1 = point2.distance(line1)
+            d2 = point3.distance(line1)
+            line2 = line1.parallel_offset(d1, side='right')
+            line3 = line1.parallel_offset(d2, side='left')
+            side2 = judge_direction(points[0], points[1], points[2]) # judge the direction of the parallel line
+            side2_ = judge_direction(points[0], points[1], list(line2.coords[0])) 
+            if side2 != side2_:
+                line2 = line1.parallel_offset(d1, side='left')
+                line3 = line1.parallel_offset(d2, side='right')
+            new_points = [list(line2.coords[0]), list(line2.coords[1]), list(line3.coords[0]), list(line3.coords[1])]
+            obj['points'] = new_points
+        # get not null_label information
+        # label_info['shapes'] = objs
         new_p = os.path.join(NEW_PATH, os.path.split(p)[1])
         with open(new_p, 'w') as fw:
             json.dump(label_info, fw, indent=4)
