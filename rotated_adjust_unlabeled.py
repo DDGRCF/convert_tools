@@ -40,7 +40,7 @@ def check_dir(p):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--path', type=str, default=r'D:\Download\飞机数据集标注数据及说明\rcf_annotations\json_annotations\*.json')
+    parser.add_argument('--path', type=str, default=r'F:\Datasets\舰船标注\*.json')
     parser.add_argument('--new_path', type=str, default='')
     args = parser.parse_args()
     assert args.path!='', "the annotations dir can not be empty"
