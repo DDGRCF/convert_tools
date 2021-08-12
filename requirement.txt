@@ -1,0 +1,4 @@
+prettytable==2.1.0
+numpy==1.19.2
+tqdm==4.62.0
+shapely==1.7.1
