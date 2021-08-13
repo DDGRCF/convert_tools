@@ -17,7 +17,7 @@ if __name__ == "__main__":
     parser.add_argument('--dir', type=str, default=r'F:\Datasets\舰船标注')
     parser.add_argument('--new_dir', type=str, default='')
     parser.add_argument('--use-labels', action='store_true')
-    parser.add_argument('--temp_label', type=str, default='null-label')
+    parser.add_argument('--temp-label', type=str, default='null-label')
     args = parser.parse_args()
     use_labels = args.use_labels
     temp_label = args.temp_label

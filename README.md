@@ -14,7 +14,6 @@
 
 - [安装](#安装)
 - [使用说明](#使用说明)
-	- [生成器](#生成器)
 
 ## 安装
 
@@ -37,6 +36,15 @@ $ pip install -r requirement.txt
 $ python labels_adjust.py --dir your dataset file
 ```
 
+将十字标注方式转化为旋转的矩形框(这个针对从头开始标注的)
 
+```sh
+$ python rotated_adjust.py --dir your dataset file
+```
 
+将十字标注方式转化为旋转的矩形框(这个针对数据集原本就有矩形标注框的)
 
+```sh
+$ python rotated_adjust.py --dir your dataset file --use-labels --temp-labels null-label
+```
+这中标注方式是在原来有矩形标注的对象上标注十字，标注的label就是temp-labels指定的(这里为null-label)，会根据null-label所标注十字所生成的旋转矩形框与原来所有的正矩形框求IOU，把IOU最大的label赋给这个临时的null-label
