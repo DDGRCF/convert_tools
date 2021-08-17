@@ -30,10 +30,10 @@ $ pip install -r requirement.txt
 ```
 ## 使用说明
 
-输出每个类的数量
+输出每个类的数量(--paths_adjust --suffix tif，进行校正)
 
 ```sh
-$ python labels_adjust.py --dir your dataset file
+$ python labels_adjust.py --dir your dataset file --paths_adjust --suffix tif
 ```
 
 将十字标注方式转化为旋转的矩形框(这个针对从头开始标注的)
